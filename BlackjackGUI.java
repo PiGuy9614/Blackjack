@@ -21,7 +21,16 @@ public class BlackjackGUI extends JPanel { //Extends JPanel class
     static ArrayList<Card> computer;
 
     public BlackjackGUI (){
-
+        playerTally = 0;
+        computerTally = 0;
+        pcount = -1;
+        ccount = -1;
+        playerOver = false;
+        computerOver = false;
+        playerContinue = true;
+        main = new DeckOfCards();
+        player = new ArrayList<Card>();
+        computer = new ArrayList<Card>();
     }
 
     //This method is very special in Java since is automatically called by the JVM (Java Virtual Machine)
@@ -33,16 +42,16 @@ public class BlackjackGUI extends JPanel { //Extends JPanel class
         repaint();
     }
 
+    public void JOPM(String m) {
+        JOptionPane.showMessageDialog(null, m);
+    }
+
     public Color rColor() {
         int r = (int)(Math.random() * 256);
         int g = (int)(Math.random() * 256);
         int b = (int)(Math.random() * 256);
         Color color = new Color(r,g,b);
         return color;
-    }
-
-    public void JOPM(String m) {
-        JOptionPane.showMessageDialog(null, m);
     }
 
     public class EndGame extends AbstractAction {
