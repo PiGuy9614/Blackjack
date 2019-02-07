@@ -1,40 +1,65 @@
-//Nicholas Koeppen
-//Class for single card
 public class Card {
-    private String type;
-    private String number;
-    private String fileID = "";
-    private int value;
-    
-    public Card() {
-        type = "spades";
-        number = "ace";
-        value = 11;
-    }
-    
-    public Card(String t, String n) {
-        type = t;
-        number = n;
-        if (number.equals("queen") || number.equals("king") || number.equals("jack")) {
-            value = 10;
-            fileID += number.toUpperCase().substring(0, 1);
-        } else if (number.equals("ace")) {
-            value = 11;
-            fileID += "A";
-        } else {
-            value = Integer.parseInt(number);
-            fileID += value;
+    private int suit, value;
+    private boolean taken;
+    private String face, fsuit, fileID;
+
+    public Card(int _Suit, int _Value) {
+        suit = _Suit;
+        value = _Value;
+        taken = false;
+        switch(suit) {
+            case 0:
+                fsuit = "Hearts";
+                break;
+            case 1:
+                fsuit = "Diamonds";
+                break;
+            case 2:
+                fsuit = "Spades";
+                break;
+            case 3:
+                fsuit = "Clubs";
+                break;
         }
-        fileID += type.toUpperCase().substring(0, 1);
+        switch(value) {
+            case 11:
+                face = "Jack";
+                break;
+            case 12:
+                face = "Queen";
+                break;
+            case 13:
+                face = "King";
+                break;
+            case 14:
+                face = "Ace";
+                break;
+            default:
+                face = Integer.toString(value);
+                break;
+        }
+    }
+
+    public boolean takeCard() {
+        if (taken == false) {
+            taken = true;
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public void returnCard() {
+        taken = false;
     }
     
-    public int getvalue() {
-        return (value);
+    public int[] getData() {
+        int[] temp = {suit, value};
+        return temp;
     }
     
     public String toString() {
-        String statement = number + " of " + type;
-        return statement;
+        return face + " of " + fsuit;
     }
     
     public String getImagePath() {
